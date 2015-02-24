@@ -1,0 +1,139 @@
+/*
+#include <iostream>
+#include<conio.h>
+#include <string.h>
+#include <locale.h>
+#include <windows.h>
+#define N 3
+using namespace std;
+class officesoftware
+{
+    char *name;
+    char *devloper;
+     int kolvo;
+     int price;
+    public:
+void set (char *a, char *b,  int c,  int x);
+void get (char *a, char *b,  int &c,  int &x);
+void show (void);
+};
+
+void officesoftware::set(char *a, char *b, int c, int x)
+{
+    name=new char [];
+    strcpy (name, a);
+    devloper=new char [];
+    strcpy (devloper, b);
+    kolvo=c;
+    price=x;
+}
+void officesoftware::get(char *a, char *b, int &c, int &x)
+{
+    delete [] a;
+	delete [] b;
+	a=new char [strlen(name)+1];
+	strcpy (a,name);
+	b=new char [strlen(devloper)+1];
+    strcpy (b,devloper);
+    c=kolvo;
+    x=price;
+}
+void officesoftware::show(void)
+{
+	cout<< name <<" ";
+	cout<< devloper <<" ";
+	cout<< kolvo <<" ";
+	cout<< price <<"$ ";
+}
+int main (void)
+{
+	setlocale (LC_ALL, "rus");
+	char *n=new char[100];
+	char *p=new char[100];
+	int s;
+	int y;
+	int i;
+	officesoftware obj[N];
+cout<<"Set\n"; 
+cout<<"Офисные пакеты\n"; 
+cout<<"Наименование|  Производитель|  Количество составных частей  |Цена($)\n";
+for(i=0; i<N; i++)
+{
+cout<<"\n==>";
+cin>>n;
+cout<<"\n==>";
+cin>>p;
+cout<<"\n==>";
+cin>>s;
+cout<<"\n==>";
+cin>>y;
+obj[i].set(n,p,s,y);
+}
+cout<<"show\n"; 
+cout<<"Офисные пакеты\n"; 
+cout<<"Наименование|  Производитель|  Количество составных частей  |Цена($)\n";
+for(i=0; i<N; i++)
+{
+	obj[i].show();
+	cout<<"\n";
+}
+cout<<"Примичание: возможно получить SmartOffice бесплатно через интернет";
+_getch();
+delete[] n;
+return 0;
+}
+*/
+
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <windows.h>
+#include <locale.h>
+
+class officesoftware
+{
+    char name[10];
+    char devloper[10];
+     int kolvo;
+     int price;
+public:
+	officesoftware(){name[0]='\0'; devloper[0]='\0';}
+    void set(char *a, char *b, int c, int x);
+	void show();
+};
+void officesoftware::set(char *a, char *b, int c, int x)
+{
+	strcpy(name,a);
+	strcpy(devloper,b);
+	kolvo=c;
+	price=x;
+}
+void officesoftware::show()
+{
+	printf("| %14s |    %10s   | %23d | %10d |\n",name,devloper,kolvo,price);
+}
+int show(officesoftware *x)
+{
+	printf("|-------------------------------------------------------------------------|\n");
+	printf("| Офисные пакеты                                                          |\n");
+	printf("|-------------------------------------------------------------------------|\n");
+	printf("|  Наименование  |  Производитель  | Количество сост.частей  |  Цена ($)  |\n");
+	printf("|-------------------------------------------------------------------------|\n");
+	for (int i=0;i<3;i++) x[i].show();
+	printf("|-------------------------------------------------------------------------|\n");
+	printf("|Примечание: возможно бесплатно получить продукт StarOffice через Internet|\n");
+	printf("|-------------------------------------------------------------------------|\n");
+	return 0;
+}
+int main(){
+	setlocale(0,"RUS");
+	officesoftware *x = new officesoftware[3]; 
+	int i;
+
+	x[0].set("Office","Microsoft",4,870);
+	x[1].set("SmartSute","Lotus",5,1020);
+	x[2].set("StarOffice","Sun",4,9);
+	show(x);
+	system("pause");
+	return 0;
+}
